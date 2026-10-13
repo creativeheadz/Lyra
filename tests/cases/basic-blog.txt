@@ -1,0 +1,2 @@
+expect: optimized
+BASIC for ChatGPT - Help me write a blog post about AI

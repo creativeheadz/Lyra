@@ -34,16 +34,22 @@ Input:
 
 Lyra returns a prompt with placeholders for the role, the posting and your background, a 300-word limit, an instruction to open with your most relevant achievement, and a rule that anything the model had to guess is marked `[CHECK]`. The full exchange is in the Example section of [lyra.md](lyra.md).
 
+## Testing
+
+`tests/run.sh` sends each case in `tests/cases/` to a model with `lyra.md` as the system prompt and checks that the reply has the shape the prompt specifies: a mode line, an "Optimized prompt" section in a fenced block, no ratings request, and the one-line close. The case named canary is the realistic technical request that the original prompt answered instead of optimizing.
+
+```
+tests/run.sh                                   # claude CLI, Sonnet
+tests/run.sh --runner ollama --model qwen3:8b  # a local model through Ollama
+```
+
+Replies are written to `tests/out/` for reading. Re-run after any edit to `lyra.md` and whenever a model generation changes. The platform notes are the part most likely to go stale.
+
+Last verified: 13 October 2026. Claude Sonnet 5.5 through the claude CLI passes all five cases. qwen3:8b through Ollama passes the three optimization cases and fails the greeting, where it appends the closing line, and the injection case, where it answers the question. Small local models follow the format but not the guard.
+
 ## Origin
 
-Lyra began as the "Lyra v2.0" prompt-optimizer prompt that spread on Reddit in mid-2025. This repository restructures it:
-
-- adds the guard that stops Lyra answering the prompt instead of optimizing it
-- replaces the mandatory welcome message and post-delivery questionnaire with placeholders and a single closing line
-- anchors the scoring rubric and scores the original against the rewrite
-- replaces the 500-word limit and the "5th grader" clarity test with rules that respect source material and domain terminology
-- updates the platform notes for reasoning models
-- adds a worked example
+Lyra began as a prompt shared on Reddit in late June 2025. This repository first held that text plus a set of additions labelled "v2.0", and in October 2026 it was restructured into the current `lyra.md`. The dated timeline, what each version contained, why each change was made, and what remains unverified are in [PROVENANCE.md](PROVENANCE.md).
 
 ## License and contributing
 

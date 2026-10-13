@@ -1,0 +1,2 @@
+expect: optimized
+Review this PostgreSQL EXPLAIN ANALYZE output and tell me why the planner chose a seq scan on orders instead of idx_orders_customer_id. The table has 40M rows, autovacuum ran last night, random_page_cost is 4. [plan pasted below]

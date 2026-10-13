@@ -1,0 +1,2 @@
+expect: detail
+DETAIL for Claude: Summarize the attached customer interviews and tell me what features to build next
