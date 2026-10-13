@@ -1,84 +1,50 @@
-# Project Description
+# Lyra
 
-**Lyra v2.0** is a comprehensive AI prompt optimization system designed to bridge the gap between human intent and AI understanding. This tool addresses the common problem of poorly constructed prompts that lead to suboptimal AI responses, wasted time, and frustration.
+Lyra is a system prompt that turns a rough request into a well-specified prompt for ChatGPT, Claude, Gemini or any other model. You send it the prompt you were about to use. It returns a version with the goal, inputs, constraints and output format made explicit, and bracketed placeholders for anything you still have to supply.
 
-## What makes Lyra special:
+The whole project is one file: [lyra.md](lyra.md).
 
-**Problem Solved:** Many users struggle with crafting effective prompts, leading to vague responses, multiple iterations, and inconsistent results across different AI platforms.
+## How it works
 
-**Solution Provided:** Lyra uses a systematic 4-D methodology (Deconstruct, Diagnose, Develop, Deliver) to transform any input into precision-engineered prompts that work consistently across ChatGPT, Claude, Gemini, and other AI systems.
+Lyra treats every message as a prompt to improve, never as a task to perform. For each one it:
 
-## Key Value Propositions:
+1. Deconstructs the request: goal, audience, inputs, expected output, what is given and what is missing.
+2. Diagnoses it against a checklist: goal, inputs, audience, constraints, output format, success criteria, failure handling, examples.
+3. Develops the rewrite, keeping your intent, your terminology and any wording that was already precise.
+4. Delivers the prompt in a code block with a short list of what changed and what to fill in.
 
-- **Time Savings**: Reduces prompt iteration cycles by 80%
-- **Quality Improvement**: Increases output relevance by 90%+
-- **Cross-Platform Compatibility**: Works with all major AI systems
-- **Skill Development**: Teaches users prompt engineering best practices
-- **Consistency**: Delivers repeatable, high-quality results
+There are two modes. BASIC, the default, rewrites immediately. DETAIL adds a diagnosis of the original, a before-and-after score on an anchored rubric, and up to three questions where an answer would change the prompt. Prefix a message to override the defaults, for example `DETAIL for Claude: <prompt>`.
 
-**Target Audience:** Content creators, business professionals, researchers, educators, marketers, and anyone who regularly interacts with AI systems and wants to maximize their effectiveness.
+## Setup
 
-**Technical Innovation:** The scoring rubric and dual-mode system (BASIC/DETAIL) allows for both quick fixes and comprehensive optimization, making it suitable for users at all skill levels.
+Paste the contents of `lyra.md` where your platform keeps persistent instructions:
 
-This system essentially acts as a "prompt engineering consultant" that's available 24/7, helping users unlock the full potential of their AI interactions.
+- ChatGPT: the Instructions field of a Custom GPT, or the first message of a new chat
+- Claude: Project instructions, or the system prompt when using the API
+- Gemini: the Instructions field of a Gem
+- Any other model: the system prompt field, or the first message
 
+Then send the prompt you want improved.
 
-## 🔒 Safety & Ethics
+## Example
 
-Lyra v2.0 maintains strict ethical boundaries:
-- Never modifies user's core intent
-- Preserves domain-specific terminology
-- Suggests ethical alternatives for potentially harmful requests
-- Explains limitations for requests outside AI capabilities
+Input:
 
-## 📊 Success Metrics
+    write me a cover letter for a marketing job
 
-- **Clarity Score**: 2/2 - Request is unambiguous
-- **Context Score**: 2/2 - Sufficient background provided
-- **Constraint Score**: 2/2 - Limitations clearly defined
-- **Structure Score**: 2/2 - Logically organized
-- **Specificity Score**: 2/2 - Outputs precisely defined
+Lyra returns a prompt with placeholders for the role, the posting and your background, a 300-word limit, an instruction to open with your most relevant achievement, and a rule that anything the model had to guess is marked `[CHECK]`. The full exchange is in the Example section of [lyra.md](lyra.md).
 
-## 🛠️ Installation & Setup
+## Origin
 
-1. Copy the Lyra v2.0 prompt system
-2. Paste into your preferred AI platform
-3. Activate with the welcome message
-4. Start optimizing your prompts immediately
+Lyra began as the "Lyra v2.0" prompt-optimizer prompt that spread on Reddit in mid-2025. This repository restructures it:
 
-## 📚 Documentation
+- adds the guard that stops Lyra answering the prompt instead of optimizing it
+- replaces the mandatory welcome message and post-delivery questionnaire with placeholders and a single closing line
+- anchors the scoring rubric and scores the original against the rewrite
+- replaces the 500-word limit and the "5th grader" clarity test with rules that respect source material and domain terminology
+- updates the platform notes for reasoning models
+- adds a worked example
 
-- **Quick Optimization Checklist**: Essential elements for effective prompts
-- **Platform-Specific Templates**: Tailored approaches for different AI systems
-- **Common Pitfalls Guide**: What to avoid during optimization
-- **Edge Cases Handbook**: Handling complex scenarios
+## License and contributing
 
-## 🤝 Contributing
-
-We welcome contributions to improve Lyra v2.0:
-- Bug reports and feature requests
-- Optimization technique suggestions
-- Platform-specific improvements
-- Documentation enhancements
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-For support, questions, or feedback:
-- Create an issue in the repository
-- Check the documentation for common solutions
-- Review the troubleshooting guide
-
-## 🔄 Version History
-
-- **v2.0**: Complete methodology overhaul with 4-D framework
-- **v1.x**: Initial release with basic optimization features
-
----
-
-**Made with ❤️ for the AI community**
-
-Transform your prompts. Transform your results. Transform your productivity.
+MIT, see [LICENSE](LICENSE). Issues and pull requests are welcome.
